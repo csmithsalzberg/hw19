@@ -2,7 +2,17 @@ var dat = '[{"females": 2089000, "country": "United States", "age": 0, "males": 
 
 var parsed = JSON.parse(dat);
 var p = document.getElementById("par");
-console.log(parsed);
 
-var overNinety = parsed.reduce(function(a,b){if (a["age"]==90){return a["total"]}});
-console.log(overNinety);
+//Total number of people between 90 and 100 years old
+var overNinetyL = parsed.filter(function(a){return a["age"]>=90 });
+var totalOverNinety = overNinetyL.reduce(function(a,b, index){if (index==1){return a["total"]+b["total"];}else{return a+b["total"];}});
+
+console.log("People between 90 and 100 years old: " + totalOverNinety);
+
+//Total number of people under 18 years old
+var minorL = parsed.filter(function(a){return a["age"]< 18 });
+var totalMinor = minorL.reduce(function(a,b, index){if (index==1){return a["total"]+b["total"];}else{return a+b["total"];}});
+
+console.log("Minors: " + totalMinor);
+
+
